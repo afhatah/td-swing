@@ -17,6 +17,7 @@ public class CalculateurPrixView extends JFrame {
     private JFormattedTextField montantHTTextField;
     private final JTextField prixArticleTextField;
     private final JTextField qteArticleTextField;
+    private final JFormattedTextField montantTTCTextField;
 
 
     public CalculateurPrixView() throws HeadlessException {
@@ -38,6 +39,11 @@ public class CalculateurPrixView extends JFrame {
         montantHTTextField.setEditable(false);
         montantHTLabel.setLabelFor(montantHTTextField);
 
+        JLabel montantTTCLabel = new JLabel("Montant TTC(France)");
+        montantTTCTextField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
+        montantTTCTextField.setEditable(false);
+        montantHTLabel.setLabelFor(montantTTCTextField);
+
         JButton computeButton = new JButton("Calculer");
         computeButton.addActionListener(e -> this.presenter.onComputeButtonClicked(prixArticleTextField.getText()));
 
@@ -49,11 +55,13 @@ public class CalculateurPrixView extends JFrame {
         labelPane.add(prixArticleLabel);
         labelPane.add(qteArticleLabel);
         labelPane.add(montantHTLabel);
+        labelPane.add(montantTTCLabel);
 
         JPanel fieldPane = new JPanel(new GridLayout(0, 1));
         fieldPane.add(prixArticleTextField);
         fieldPane.add(qteArticleTextField);
         fieldPane.add(montantHTTextField);
+        fieldPane.add(montantTTCTextField);
 
         contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         add(labelPane, WEST);
@@ -71,6 +79,9 @@ public class CalculateurPrixView extends JFrame {
 
     public void setMontantHT(double n) {
         this.montantHTTextField.setValue(n);
+    }
+    public void setMontantTTC(double n) {
+        this.montantTTCTextField.setValue(n);
     }
 
     public String getPrixArticle() {
