@@ -34,6 +34,11 @@ public class CalculateurPrixView extends JFrame {
         qteArticleLabel.setLabelFor(qteArticleTextField);
         qteArticleTextField.setToolTipText("Entrez ici la quantité d'un article");
 
+        JLabel paysLabel = new JLabel("Pays");
+        JComboBox<Pays> comboPays = new JComboBox<Pays>(Pays.values());
+        paysLabel.setLabelFor(comboPays);
+        comboPays.addActionListener(e -> this.presenter.onComboPaysClicked(comboPays.getSelectedItem()));
+
         JLabel montantHTLabel = new JLabel("Montant HT");
         montantHTTextField = new JFormattedTextField(NumberFormat.getCurrencyInstance());
         montantHTTextField.setEditable(false);
@@ -54,12 +59,14 @@ public class CalculateurPrixView extends JFrame {
         JPanel labelPane = new JPanel(new GridLayout(0, 1));
         labelPane.add(prixArticleLabel);
         labelPane.add(qteArticleLabel);
+        labelPane.add(paysLabel);
         labelPane.add(montantHTLabel);
         labelPane.add(montantTTCLabel);
 
         JPanel fieldPane = new JPanel(new GridLayout(0, 1));
         fieldPane.add(prixArticleTextField);
         fieldPane.add(qteArticleTextField);
+        fieldPane.add(comboPays);
         fieldPane.add(montantHTTextField);
         fieldPane.add(montantTTCTextField);
 
@@ -80,6 +87,7 @@ public class CalculateurPrixView extends JFrame {
     public void setMontantHT(double n) {
         this.montantHTTextField.setValue(n);
     }
+
     public void setMontantTTC(double n) {
         this.montantTTCTextField.setValue(n);
     }
