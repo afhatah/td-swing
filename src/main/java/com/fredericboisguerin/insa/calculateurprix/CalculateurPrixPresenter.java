@@ -8,6 +8,13 @@ public class CalculateurPrixPresenter {
     }
 
     public void onComputeButtonClicked(String montantArticleAsText) {
-        calculateurPrixView.afficherErreur("Allez, au boulot ! :)");
+        try {
+            double montantHT = Double.parseDouble(montantArticleAsText) * (Double.parseDouble(this.calculateurPrixView.getQteArticle()));
+            calculateurPrixView.setMontantHT(montantHT);
+        }
+        catch (Exception e) {
+            calculateurPrixView.afficherErreur("Veuillez entrer des nombres.");
+        }
+
     }
 }
